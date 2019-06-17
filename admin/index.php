@@ -93,6 +93,8 @@ default:
     <title>Online Exam</title>
       <link rel="stylesheet" href="css/style.basic.css">
       <link rel="stylesheet" href="../courses/css/main.css">
+      <link rel="stylesheet" href="css/dashboard.css">
+
 
   </head>
   <body onload="chartLoad()">
@@ -115,232 +117,196 @@ default:
         </header>
       
 <main class="main">
-          <!-- Page Header-->
-          <header >
-            <div>
-              <h2>Dashboard</h2>
+    <div>
+        <h2>Dashboard</h2>
+    </div>
+    <!-- Dashboard Counts Section-->
+    <div>
+        <div class="pure-u-1 pure-u-md-1-3">
+            <div class="column-block">
+                <div class="column-block-header column-success">
+                    <h2 >Total<br>Passed users
+                        <br><?php echo count(getAllPassedUsers()); ?> </h2>
+                </div>
             </div>
-          </header>
-          <!-- Dashboard Counts Section-->
-          <section>
-            <div>
-              <div >
-                <!-- Item -->
-                <div>
-                  <div>
-                    <div><span>Total<br>Passed users</span>
-                      <div>
-                        <div role="progressbar" style="width: <?php echo (count(getAllPassedUsers())/count(getAllUsersAttempts()))*100; ?>%; height: 4px;"></div>
-                      </div>
-                    </div>
-                    <div><strong><?php echo count(getAllPassedUsers()); ?></strong></div>
-                  </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-3">
+            <div class="column-block">
+                <div class="column-block-header column-warning">
+
+                    <h2 class="column-block-info">Total<br>Failed users
+                        <br><?php echo count(getAllFailedUsers()); ?></h2>
                 </div>
-                <!-- Item -->
-                <div>
-                  <div>
-                    <div><span>Total<br> Failed users</span>
-                      <div>
-                        <div role="progressbar" style="width: <?php echo (count(getAllFailedUsers())/count(getAllUsersAttempts()))*100; ?>%; height: 4px;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" ></div>
-                      </div>
-                    </div>
-                    <div><strong><?php echo count(getAllFailedUsers()); ?></strong></div>
-                  </div>
-                </div>
-                <!-- Item -->
-                <div>
-                  <div>
-                    <div><span>All<br>Active Users</span>
-                      <div>
-                        <div role="progressbar" style="width: <?php echo (getAllActiveUsers()/count(getAllUsers()))*100; ?>%; height: 4px;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                    <div><strong><?php echo getAllActiveUsers(); ?></strong></div>
-                  </div>
-                </div>
-                <!-- Item -->
-                <div>
-                  <div>
-                    <div><span>Average <br>Scores</span>
-                      <div>
-                        <div role="progressbar" style="width: <?php echo getAvgScore() * 10; ?>%; height: 4px;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                    <div><strong><?php echo round(getAvgScore(),2); ?></strong></div>
-                  </div>
-                </div>
-              </div>
             </div>
-          </section>
-          <!-- Dashboard Header Section    -->
-          <section>
-            <div >
-              <div >
-                <!-- Statistics -->
-                <div>
-                  <div >
-                    <div style="padding: 12px;"></div>
-                    <div><strong><?php echo count(getAllUsers()); ?></strong><br><small>Total users</small></div>
-                  </div>
-                 
-                </div>
-                <div>
-                 <div>
-                    <div style="padding: 12px;"></div>
-                    <div><strong><?php echo count(getAllCourse()); ?></strong><br><small>Total courses</small></div>
-                  </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-3">
+            <div class="column-block">
+                <div class="column-block-header">
 
-                  </div>
-                  <div>
-                  <div>
-                    <div style="padding: 12px;"></div>
-                    <div><strong><?php echo count(getAllActiveCourse()); ?></strong><br><small>Active courses</small></div>
-                  </div>
-
+                    <h2 class="column-block-info">All<br>Active Users
+                        <br><?php echo getAllActiveUsers(); ?></h2>
                 </div>
-              
-                  <div>
-                    <div style="padding: 12px;"></div>
-                    <div><strong><?php echo $_SESSION["user_count"]; ?></strong><br><small>Users Writing Test</small></div>
-                  </div>
-                </div>
-              </div>
             </div>
-          </section>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-3">
+            <div class="column-block">
+                <div class="column-block-header column-success">
 
-  
-<!----------All User Attempts in quiz  no-padding-top   -->
-          <section>
-            <div>
-            <div>
-               <div>
-                  <h3 >All Users who appeared for Quiz</h3>
+                    <h2 class="column-block-info">Average <br>Scores
+                        <br><?php echo round(getAvgScore(),2); ?></h2>
                 </div>
-                <div>
-                      <h3>Sort data By</h3>
-                    </div>
-                  <div>
-                    
-                    <div role="group" aria-label="Basic example">
-                      <?php  
-                      echo '<button type="button"><a style="color: white;" href="../admin/index.php?id=all">All User Attempts</a></button>';
-                      echo '<button type="button"><a style="color: white;" href="../admin/index.php?id=highest">Highest</a></button>';
-                      echo '<button type="button"><a style="color: white;" href="../admin/index.php?id=lowest">Lowest</a></button>';
-                     ?>
-                    </div> 
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-3">
+            <div class="column-block">
+                <div class="column-block-header column-warning">
 
+                    <h2 class="column-block-info">Total users
+                        <br><?php echo count(getAllUsers()); ?></h2>
+                </div>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-3">
+            <div class="column-block">
+                <div class="column-block-header column-warning">
+
+                    <h2 class="column-block-info">Total courses
+                        <br><?php echo count(getAllCourse()); ?></h2>
+                </div>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-3">
+            <div class="column-block">
+                <div class="column-block-header column-success">
+
+                    <h2 class="column-block-info">Active courses
+                        <br><?php echo count(getAllActiveCourse()); ?></h2>
+                </div>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-3">
+            <div class="column-block">
+                <div class="column-block-header">
+
+                    <h2 class="column-block-info">User Count
+                        <br><?php echo $_SESSION["user_count"]; ?></h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!----------All User Attempts in quiz  no-padding-top   -->
+    <section>
+        <div>
+            <div>
+                <div>
+                    <h3 >All Users who appeared for Quiz</h3>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-1 pure-u-md-1-3">
+                        <div class="column-block">
+                            <table class="pure-table pure-table-horizontal">
+                                <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email</th>
+                                    <th>Phone Number</th>
+                                    <th>Score</th>
+                                    <th>Date</th>
+                                    <th>Course Name</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tbody>
+                                <?php
+                                $a = $GLOBALS['$sortingData'];
+                                foreach ($a as $info) {
+                                    echo "<tr>";
+                                    echo "<td>".$info['firstName']. "<br>"."</td>";
+                                    echo "<td>".$info['lastName']."</td>";
+                                    echo "<td>".$info['email']."</td>";
+                                    echo "<td>".$info['phoneNumber']."</td>";
+                                    echo "<td>".$info['score']."</td>";
+                                    echo "<td>".separateDataTime($info['date1'])."</td>";
+                                    echo "<td>".$info['courseName']."</td>";
+                                    echo " </tr>";
+                                }
+                                ?>
+                                </tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="pure-u-1 pure-u-md-2-3">
+            <div class="column-block">
+                <table class="pure-table pure-table-horizontal">
                     <div>
-                     <form action="../admin/model/dataValidationDate.php" autocomplete="off" method="post">
-                      <div>
-                        <input type="date1" name="sortDate"  title="d/m/Y" id="date1" placeholder="Select Date">
-                      </div>
-                      <button type="submit">Sort by Date</button>
-                     </form>
-                  </div>
-              </div>
-<!----------------- Tablse starts from here-->
-                <div>
-                  <div>                       
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Email</th>
-                          <th>Phone Number</th>
-                          <th>Score</th>
-                          <th>Date</th>
-                          <th>Course Name</th>
-                          <!-- <th>Action</th> -->
-                        </tr>
-                      </thead>
-                      <tbody>
-                       <?php 
-                            $a = $GLOBALS['$sortingData'];
-                            foreach ($a as $info) {
-                              echo "<tr>";
-                              echo "<td>".$info['firstName']. "<br>"."</td>";
-                              echo "<td>".$info['lastName']."</td>";
-                              echo "<td>".$info['email']."</td>";
-                              echo "<td>".$info['phoneNumber']."</td>";
-                              echo "<td>".$info['score']."</td>";
-                              echo "<td>".separateDataTime($info['date1'])."</td>";
-                              echo "<td>".$info['courseName']."</td>";
-                              echo " </tr>";
-                            }
-                          ?>
-                        </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-           </section>
-<!----------All User from database     -->
-           <section>
-            <div>
-            <div>
-             <div>
-                <h3>All Users</h3>
-              </div>
-              <div id="accessChange" role="alert">
-                 User access to login has been changed!!
-              </div>
-              <div id="deleteAlert1" role="alert">
-                 User deleted permanently !!
-              </div>
-                <div>
-                  <div>                       
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Email</th>
-                          <!-- <th>Password</th> -->
-                          <th>Address</th>
-                          <th>Phone Number</th>
-                          <th>Is Active User</th>
-                          <th>User Access control</th>
-                          <th>Delete User</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                       <?php 
-                            $a = getAllUsers();
-                            $salt = "8dC_9Kl?";
-                            foreach ($a as $info) {
-                              
-                              echo "<tr>";
-                              echo "<td>".$info['firstName']. "<br>"."</td>";
-                              echo "<td>".$info['lastName']."</td>";
-                              echo "<td>".$info['email']."</td>";
-                              // echo "<td>".md5($info['password'].$salt) ."</td>";
-                              echo "<td>".$info['address']."</td>";
-                              echo "<td>".$info['phoneNumber']."</td>";
+                        <h3>All Users</h3>
+                    </div>
+                    <div id="accessChange" role="alert">
+                        User access to login has been changed!!
+                    </div>
+                    <div id="deleteAlert1" role="alert">
+                        User deleted permanently !!
+                    </div>
+                    <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <!-- <th>Password</th> -->
+                        <th>Address</th>
+                        <th>Phone Number</th>
+                        <th>Is Active User</th>
+                        <th>User Access control</th>
+                        <th>Delete User</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    $a = getAllUsers();
+                    $salt = "8dC_9Kl?";
+                    foreach ($a as $info) {
 
-                              if ($info['isActive']) {
-                                echo "<td>"."Yes"."</td>";
-                              }
-                              else{
-                                echo "<td>"."No"."</td>";
-                              }
-                              echo '<td><button type="button" data-toggle="tooltip" data-placement="top" title="If pressed User access to login will change">
+                        echo "<tr>";
+                        echo "<td>".$info['firstName']. "<br>"."</td>";
+                        echo "<td>".$info['lastName']."</td>";
+                        echo "<td>".$info['email']."</td>";
+                        // echo "<td>".md5($info['password'].$salt) ."</td>";
+                        echo "<td>".$info['address']."</td>";
+                        echo "<td>".$info['phoneNumber']."</td>";
+                        if ($info['isActive']) {
+                            echo "<td>"."Yes"."</td>";
+                        }
+                        else{
+                            echo "<td>"."No"."</td>";
+                        }
+                        echo '<td><button type="button" data-toggle="tooltip" data-placement="top" title="If pressed User access to login will change">
                                  <a style="color: white;" href="../admin/deletion/changeUserAccess.php?id='.$info['email'].'">Login Acess</a>
                               </button> </td>';
-                             echo '<td><button type="button" data-toggle="tooltip" data-placement="top" title="This will delete the user Permanently">
+                        echo '<td><button type="button" data-toggle="tooltip" data-placement="top" title="This will delete the user Permanently">
                                  <a style="color: white;" href="../admin/deletion/deleteUser.php?id='.$info['email'].'">Delete</a>
                               </button> </td>';
-                              echo " </tr>";
-                            }
-                          ?>
-                        </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
+                        echo " </tr>";
+                    }
+                    ?>
+
+                    </tbody>
+                </table>
             </div>
-           </section>
+        </div>
+    </div>
+    </section>
 
     </main>
   </body>

@@ -102,9 +102,11 @@ switch ($btnCheck) {
 <html>
   <head>
 
-    <title>Online Exam</title>
+    <title>Challengerz quiz</title>
       <link rel="stylesheet" href="css/style.basic.css">
       <link rel="stylesheet" href="../courses/css/main.css">
+      <link rel="stylesheet" href="css/addUser.css">
+
 
   </head>
 <body>
@@ -123,102 +125,45 @@ switch ($btnCheck) {
             ?>, Logout</a>
     </div>
 </header>
-      
-      <main class="main">
-          <!-- Page Header-->
 
-              <h2 >Forms</h2>
+<div id="saveAlert" role="alert">
+    Great, New Question Successfully Added!!
+</div>
+<div id="updateAlert" role="alert">
+    Great, Question Successfully Updated!!
+</div>
+<div id="noUpdateAlert" role="alert">
+    Updation Failed! <br>No such question exists!!
+</div>
 
 
-          <!-- Forms Section-->
-          <section> 
-            <div>
-              <div>
-               
-                <!-- Form Elements -->
-                <div >
-                  <div >
-                    
-                    <div>
-                      <h3 >Questions </h3>
-                    </div>
-                    <div >
-<!-- ------------------ Form Starts here -->
-                    <div id="saveAlert" role="alert">
-                           Great, New Question Successfully Added!!
-                        </div>
-                        <div id="updateAlert" role="alert">
-                           Great, Question Successfully Updated!!
-                        </div>
-                        <div id="noUpdateAlert" role="alert">
-                           Updation Failed! <br>No such question exists!!
-                        </div>
-                        <div id="addQuestionForm" >
-                      <form action="../admin/model/dataValidationQuestion.php" method="post">
-                        
-                        <div>
-                          <label>Course & Question</label>
-                          <div>
-                            <div >
-                              <input id="courseName" type="text" name="courseName" required  value="<?php print_r($GLOBALS['$questionData']['courseName']); ?>">
-                              <label for="courseName" >Course Name      </label>
-                            </div>
-                            <div>
-                              <input id="newQuestion" type="text" name="question" required  value="<?php print_r($GLOBALS['$questionData']['question']); ?>">
-                              <label for="newQuestion" > Question    </label>
-                            </div>
-                          </div>
-                        </div>
-                        <div></div>
-                        <div>
-                          <label>Options</label>
-                          <div >
-                            <div>
-                              <input id="option1" type="text" name="option1" required value="<?php print_r($GLOBALS['$questionData']['option1']); ?>">
-                              <label for="option1" >Input Option 1      </label>
-                            </div>
-                            <div>
-                              <input id="option2" type="text" name="option2" required value="<?php print_r($GLOBALS['$questionData']['option2']); ?>">
-                              <label for="option2" >Input Option 2     </label>
-                            </div>
-                            <div>
-                            <input id="option3" type="text" name="option3" required value="<?php print_r($GLOBALS['$questionData']['option3']); ?>">
-                            <label for="option3" >Input Option 3     </label>
-                            </div>
-                            <div>
-                              <input id="option4" type="text" name="option4" required value="<?php print_r($GLOBALS['$questionData']['option4']); ?>">
-                              <label for="option4" >Input Option 4      </label>
-                            </div>
-                          </div>
-                        </div>
-                        <div>
-                          <label>Correct Options</label>
-                          <div>
-                            <div>
-                              <input id="correctOption" type="text" name="correctOption" required value="<?php print_r($GLOBALS['$questionData']['correctOption']); ?>">
-                              <label for="correctOption" >Input Correct Option</label>
-                            </div>
-                            
-                          </div>
-                        </div>
-                        
-                        <div>
-                          <div>
-                            <input type="submit"  name="saveQuestion" value="Save Question">
-                            <input type="submit"  name="updateQuestion" value="Update Question">
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+<div class="log-form" style="margin-top: 6%">
+    <div id="addQuestionForm" >
+        <h2>Question</h2>
+        <form action="../admin/model/dataValidationQuestion.php" method="post">
+            <label>Course & Question</label>
+            Course Name
+            <input id="courseName" type="text" name="courseName" required  value="<?php print_r($GLOBALS['$questionData']['courseName']); ?>">
+            New Question
+            <input id="newQuestion" type="text" name="question" required  value="<?php print_r($GLOBALS['$questionData']['question']); ?>">
+            <label>Options</label>
+            Option 1
+            <input id="option1" type="text" name="option1" required value="<?php print_r($GLOBALS['$questionData']['option1']); ?>">
+            Option 2
+            <input id="option2" type="text" name="option2" required value="<?php print_r($GLOBALS['$questionData']['option2']); ?>">
+            Option 3
+            <input id="option3" type="text" name="option3" required value="<?php print_r($GLOBALS['$questionData']['option3']); ?>">
+            Option 4
+            <input id="option4" type="text" name="option4" required value="<?php print_r($GLOBALS['$questionData']['option4']); ?>">
+            <label>Correct Options</label>
+            <input id="correctOption" type="text" name="correctOption" required value="<?php print_r($GLOBALS['$questionData']['correctOption']); ?>">
+            <input type="submit"  name="saveQuestion" value="Save Question" class="btn">
+            <input type="submit"  name="updateQuestion" value="Update Question" class="btn">
+        </form>
+    </div>
 
-      </main>
-    <!-- JavaScript files-->
+
+</div>
     <script>
     function myFunction() {
     var x = document.getElementById("successAlert");

@@ -42,10 +42,7 @@ switch ($btnCheck) {
                 }
                 </style>';
 }
-
-
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -78,11 +75,11 @@ switch ($btnCheck) {
     <h2>All Courses</h2>
 
     <section>
-        <div role="group" class="button">
+        <div role="group">
             <?php
             $a = getAllCourse();
             foreach ($a as $info) {
-                echo '<button class="button" ><a href="../admin/questions.php?id=' . urlencode($info['courseName']) . '">' . $info['courseName'] . '</a></button>';
+                echo '<button ><a href="../admin/questions.php?id=' . urlencode($info['courseName']) . '">' . $info['courseName'] . '</a></button>';
             }
             ?>
         </div>

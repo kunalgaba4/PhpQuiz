@@ -106,6 +106,7 @@ switch ($btnCheck) {
     <title>Online Exam</title>
       <link rel="stylesheet" href="css/style.basic.css">
       <link rel="stylesheet" href="../courses/css/main.css">
+      <link rel="stylesheet" href="css/addUser.css">
 
 
   </head>
@@ -125,85 +126,42 @@ switch ($btnCheck) {
               ?>, Logout</a>
       </div>
   </header>
-      
-       <main class="main">
-              <h2 >Forms</h2>
+
+  <div id="saveAlert" role="alert" >
+      Great, New Course Successfully Added!!
+  </div>
+  <div id="updateAlert" role="alert">
+      Great, Course Successfully Updated!!
+  </div>
+  <div id="noUpdateAlert" role="alert">
+      Updation Failed! <br>No such course exists!!
+  </div>
+
+
+  <div class="log-form">
+      <div id="addCourseForm">
+          <h2>Login to your account</h2>
+          <form action="../admin/model/dataValidationCourse.php" method="post">
+              <label >Course Details</label>
+              Enter Course Name
+              <input id="courseName" type="text" name="courseName" required>
+              Enter Passing Marks
+              <input id="passingMarks" type="number" name="passingMarks" required>
+              <label >Course Access <br><small >Access to course by users</small></label>
+              <br/>Active
+              <input id="optionsRadios1" type="radio" checked="" value="1" name="courseAccess">
+              Inactive
+              <input id="optionsRadios2" type="radio" value="0" name="courseAccess">
+
+              <input type="submit"  name="saveCourse" value="Save Course" class="btn">
+              <input type="submit"  name="updateCourse" value="Update Course" class="btn">
+          </form>
+      </div>
+
+  </div>
 
 
 
-
-          <!-- Forms Section-->
-          <section> 
-            <div>
-              <div>
-                <!-- Form Elements -->
-                <div>
-                  <div >
-                    <div >
-                      <h3 >Add Course</h3>
-                    </div>
-                    <div >
-<!-- ------------------ Form Starts here -->
-                      <div id="saveAlert" role="alert" >
-                           Great, New Course Successfully Added!!
-                        </div>
-                        <div id="updateAlert" role="alert">
-                           Great, Course Successfully Updated!!
-                        </div>
-                        <div id="noUpdateAlert" role="alert">
-                           Updation Failed! <br>No such course exists!!
-                        </div>
-                        <div id="addCourseForm" >
-                      <form action="../admin/model/dataValidationCourse.php" method="post">
-                        <div >
-                          
-                          <label >Course Details</label>
-                          <div>
-                            <div >
-                              <input id="courseName" type="text" name="courseName" required>
-                              <label for="courseName" >Subject Name      </label>
-                            </div>
-                           
-                            <div >
-                              <input id="passingMarks" type="number" name="passingMarks" required>
-                              <label for="passingMarks" >Passing Marks</label>
-                            </div>
-
-                          </div>
-
-
-                        </div>
-                        <div>
-                             <label >Course Access <br><small >Access to course by users</small></label>
-                            <div >
-                            <div>
-                              <input id="optionsRadios1" type="radio" checked="" value="1" name="courseAccess">
-                              <label for="optionsRadios1">Active</label>
-                            </div>
-                            <div>
-                              <input id="optionsRadios2" type="radio" value="0" name="courseAccess">
-                              <label for="optionsRadios2">Not Active</label>
-                            </div>
-                          </div>
-                        </div>
-                        <div>
-                          <div>
-                            <input type="submit"  name="saveCourse" value="Save Course">
-                            <input type="submit"  name="updateCourse" value="Update Course">
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-       </main>
-
-    <!-- JavaScript files-->
     <script>
     function myFunction() {
     var x = document.getElementById("successAlert");
