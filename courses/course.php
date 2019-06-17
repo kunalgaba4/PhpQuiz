@@ -77,7 +77,9 @@ function getUserName($email)
 
     <div class="topnav">
         <a href="#">Changerz Quiz</a>
-
+        <a href="course.php"> Courses </a>
+        <a href="profile.php"> Profile </a>
+        <a href="quizattempt.php"> Quiz Attempts</a>
         <a href="login.php" style="float: right">
             <?php
             if (isset($_SESSION['user_email'])) {
@@ -88,70 +90,28 @@ function getUserName($email)
     </div>
 </header>
 
+<main class="data" style="margin-left: 20%">
+    <h2>Courses</h2>
 
-<nav class="sidenav">
-    <!-- Sidebar Navidation Menus-->
-    <h1 style="color: white; alignment: center;" >Menu</h1>
-    <hr/>
-    <ul class="list-unstyled">
-
-        <li class="active"><a href="course.php"> Courses </a></li>
-        <li><a href="profile.php"> Profile </a></li>
-        <li><a href="quizattempt.php"> Quiz Attempts</a></li>
-    </ul>
-</nav>
-
-<main class="main">
-    <h2 class="no-margin-bottom">Courses</h2>
-    <div class="card-deck">
         <?php $i = 0 ?>
         <?php $courses = getAllCourses(); ?>
-        <?php foreach ($courses
+        <?php foreach ($courses as $course):?>
+        <?php $i = $i + 1; ?>
+            <a href= <?php echo "../questions?id=" . $course['courseId'] ?>>
+                <h2> <?php echo "Quiz " . $i ?> </h2>
+                <h3><?php echo $course['courseName']; ?></h3>
+                <?php
+                $passingMarks = $course['passingMarks'];
+                echo "Passing marks: " . $passingMarks . "<br>";
+                $highScore = getHighestScore($course['courseId']);
 
-        as $course):
+                if (isset($highScore[0])) {
+                    echo "Highest Score: " . $highScore[0];
+                } else {
+                    echo "Highest Score: " . 0;
+                }; ?>
+            </a>
 
-        ?>
-        <?php $i = $i + 1;
-        // print_r($course['courseId']);
-        ?>
-
-        <a href= <?php echo "../questions?id=" . $course['courseId'] ?>>
-
-
-            <div><h1> <?php echo "# Test " . $i ?> </h1>
-                <!-- <p style="float: right;">  </p> -->
-
-            </div>
-            <div class="card-body">
-                <h3 class="card-title">
-
-                    <?php echo $course['courseName']; ?>
-
-                </h3>
-
-                <!--  <p class="card-text">
-                     <?php echo "Passing marks: " . 8; ?>
-                     </p> -->
-
-                <p class="card-text">
-
-                    <?php
-                    $passingMarks = $course['passingMarks'];
-
-                    echo "Passing marks: " . $passingMarks . "<br>";
-
-                    $highScore = getHighestScore($course['courseId']);
-
-                    if (isset($highScore[0])) {
-                        echo "Highest Score: " . $highScore[0];
-                    } else {
-                        echo "Highest Score: " . 0;
-                    }; ?>
-
-                </p>
-            </div>
-    </div>
-    </a>
     <?php endforeach; ?>
 
 

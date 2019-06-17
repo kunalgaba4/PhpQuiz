@@ -1,12 +1,11 @@
-<?php 
+<?php
 
 session_start();
 
-if($_SESSION['adminEmail'] == "")
-{
-   // not logged in
-   header('Location: ../admin/login.php');
-   exit();
+if ($_SESSION['adminEmail'] == "") {
+    // not logged in
+    header('Location: ../admin/login.php');
+    exit();
 }
 
 
@@ -18,7 +17,7 @@ if (isset($_GET['id'])) {
     $GLOBALS['$courseName'] = $_GET['id'];
 }
 
-$btnCheck = filter_input(INPUT_COOKIE, 'btnCheck');  
+$btnCheck = filter_input(INPUT_COOKIE, 'btnCheck');
 echo '<style type="text/css">
                 #deleteAlert {
                     display: none;
@@ -36,7 +35,7 @@ switch ($btnCheck) {
         setcookie('btnCheck', '', $expire, '/');
 
         break;
-default:
+    default:
         echo '<style type="text/css">
                 #deleteAlert {
                     display: none;
@@ -50,127 +49,97 @@ default:
 
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
 
     <title>Online Exam</title>
-      <link rel="stylesheet" href="css/style.basic.css">
+    <link rel="stylesheet" href="css/style.basic.css">
+    <link rel="stylesheet" href="../courses/css/main.css">
+
 </head>
-  <body>
+<body>
+<header>
+    <div class="topnav">
+        <a href="#">Changerz Quiz</a>
+        <a href="index.php">Home </a>
+        <a href="addUser.php">Add User</a>
+        <a href="courses.php">Courses </a>
+        <a href="addCourse.php">Add Course</a>
+        <a href="questions.php">Question Bank </a>
+        <a href="addQuestion.php">Add Questions </a>
+        <a href="login.php" style="float: right">
+            <?php
+            echo $_SESSION['fullName'];
+            ?>, Logout</a>
+    </div>
+</header>
 
-      <header >
-        <nav >
-                <!-- Navbar Brand --><a href="index.php" >
-                  <span>Knowlegde Calculator </span><strong>Admin</strong>
-                <!-- Toggle Button-->
-                <a id="toggle-btn" href="#" ><span></span><span></span><span></span></a>
+<main style="margin: 3%">
 
-              <!-- Navbar Menu -->
-              <ul >
-              
-                <!-- Logout    -->
-                <li ><a href="login.php">Logout</a></li>
-              </ul>
+    <h2>All Courses</h2>
 
-        </nav>
-      </header>
+    <section>
+        <div role="group" class="button">
+            <?php
+            $a = getAllCourse();
+            foreach ($a as $info) {
+                echo '<button class="button" ><a href="../admin/questions.php?id=' . urlencode($info['courseName']) . '">' . $info['courseName'] . '</a></button>';
+            }
+            ?>
+        </div>
 
-        <!-- Side Navbar -->
-        <nav class="sidenav" >
+        <div>
 
-              <h1><?php echo $_SESSION['fullName']; ?></h1>
-              <p>Admin</p>
+            <h3>Questions</h3>
 
-          <!-- Sidebar Navidation Menus--><span >Main</span>
-          <ul >
-            <li><a href="index.php">Home </a></li>
-            <li><a href="addUser.php">Add User</a></li>
-            <li><a href="courses.php">Courses </a></li>
-            <li><a href="addCourse.php">Add Course</a></li>
-            <li><a href="questions.php">Question Bank </a></li>
-            <li><a href="addQuestion.php">Add Questions </a></li>
-            <li><a href="login.php">Login page </a></li>
-          </ul>
-        </nav>
-      
-<main class="main">
-
-              <h2 >All Courses</h2>
-
-          <!-- Breadcrumb-->
-          <div >
-            <ul >
-              <li><a href="index.php">Home</a></li>
-              <li>Question Bank   </li>
-            </ul>
-          </div>
-          <section >
-              <div role="group" aria-label="Basic example">
-                <?php 
-                  $a = getAllCourse();
-                  foreach ($a as $info) {
-                      echo '<button type="button" ><a style="color: white;" href="../admin/questions.php?id='.urlencode($info['courseName']).'">'.$info['courseName'].'</a></button>';
-                    }
-                ?>
-              </div>
-            <div>
-              <div>
-               <div>
-                  <h3>Questions</h3>
-                </div>
-                <div id="deleteAlert" role="alert">
-                 Great, Question Successfully Deleted!!
-                </div>
-                  <div >
-                    <div>                       
-                      <table>
-                        <thead>
-                          <tr>
-                            <th>#</th>
-                            <th>Course Name</th>
-                            <th>Question</th>
-                            <th>Option1</th>
-                            <th>Option2</th>
-                            <th>Option3</th>
-                            <th>Option4</th>
-                            <th>Correct Option</th>
-                            <th>Edit Question</th>
-                            <th>Delete Question</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <?php 
-                          $a = getQuestionsWithCourseName($GLOBALS['$courseName']);
-                          $b = 0;
-                          foreach ($a as $info) {
-                            
-                            $b++;
-                            echo "<tr>";
-                            echo "<td>".$b. "<br>"."</td>";
-                            echo "<td>".$info['courseName']."</td>";
-                            echo "<td>".$info['question']."</td>";
-                            echo "<td>".$info['option1']."</td>";
-                            echo "<td>".$info['option2']."</td>";
-                            echo "<td>".$info['option3']."</td>";
-                            echo "<td>".$info['option4']."</td>";
-                            echo "<td>".$info['correctOption']."</td>";
-                            // echo "<td>  <a href='addQuestion.php?id=".urlencode($info['questionId'])."'>Edit Question</a> </td>";
-                            // echo "<td>  <a href='questions.php?id=id=".urlencode($info['questionId'])."'>Delete Question</a> </td>";
-                            echo '<td><button type="button"  data-toggle="tooltip" data-placement="top" title="Click to edit the Question details">
-                                 <a style="color: white;" href="addQuestion.php?id='.urlencode($info['questionId']).'">Edit</a>
-                            </button> </td>';
-                            echo '<td><button type="button"  data-toggle="tooltip" data-placement="top" title="Clicking Delete will delete the Question permanently">
-                                 <a style="color: white;" href="../admin/deletion/deleteQuestion.php?id='.urlencode($info['questionId']).'">Delete</a>
-                            </button> </td>';
-                            echo " </tr>";
-                          }
-                        ?>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
+            <div id="deleteAlert" role="alert">
+                Great, Question Successfully Deleted!!
             </div>
-          </section>
+
+            <table>
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Course Name</th>
+                    <th>Question</th>
+                    <th>Option1</th>
+                    <th>Option2</th>
+                    <th>Option3</th>
+                    <th>Option4</th>
+                    <th>Correct Option</th>
+                    <th>Edit Question</th>
+                    <th>Delete Question</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $a = getQuestionsWithCourseName($GLOBALS['$courseName']);
+                $b = 0;
+                foreach ($a as $info) {
+                    $b++;
+                    echo "<tr>";
+                    echo "<td>" . $b . "<br>" . "</td>";
+                    echo "<td>" . $info['courseName'] . "</td>";
+                    echo "<td>" . $info['question'] . "</td>";
+                    echo "<td>" . $info['option1'] . "</td>";
+                    echo "<td>" . $info['option2'] . "</td>";
+                    echo "<td>" . $info['option3'] . "</td>";
+                    echo "<td>" . $info['option4'] . "</td>";
+                    echo "<td>" . $info['correctOption'] . "</td>";
+                    echo '<td><button type="button"  data-toggle="tooltip" data-placement="top" title="Click to edit the Question details">
+                                 <a style="color: black;" href="addQuestion.php?id=' . urlencode($info['questionId']) . '">Edit</a>
+                            </button> </td>';
+                    echo '<td><button type="button"  data-toggle="tooltip" data-placement="top" title="Clicking Delete will delete the Question permanently">
+                                 <a style="color: black;" href="../admin/deletion/deleteQuestion.php?id=' . urlencode($info['questionId']) . '">Delete</a>
+                            </button> </td>';
+                    echo " </tr>";
+                }
+                ?>
+                </tbody>
+            </table>
+
+
+        </div>
+    </section>
 </main>
-  </body>
+</body>
 </html>

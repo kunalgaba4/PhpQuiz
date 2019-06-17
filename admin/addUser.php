@@ -1,16 +1,15 @@
-<?php 
+<?php
 
 session_start();
 
-if($_SESSION['adminEmail'] == "")
-{
-   // not logged in
-   header('Location: ../admin/login.php');
-   exit();
+if ($_SESSION['adminEmail'] == "") {
+    // not logged in
+    header('Location: ../admin/login.php');
+    exit();
 }
 
 
-$btnCheck = filter_input(INPUT_COOKIE, 'btnCheck');  
+$btnCheck = filter_input(INPUT_COOKIE, 'btnCheck');
 echo '<style type="text/css">
                 #updateAlert {
                     display: none;
@@ -101,145 +100,76 @@ switch ($btnCheck) {
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
 
     <title>Online Exam</title>
-      <link rel="stylesheet" href="css/style.basic.css">
-  
-  </head>
-  <body>
+    <link rel="stylesheet" href="css/style.basic.css">
+    <link rel="stylesheet" href="../courses/css/main.css">
+    <link rel="stylesheet" href="css/addUser.css">
 
-      <header >
-        <nav  >
-                <a href="index.php">
 
-                    <span>Online Exam </span><strong>Admin</strong></div></a>
-                <!-- Toggle Button-->
-                <a id="toggle-btn" href="#"><span></span><span></span><span></span></a>
 
-              <!-- Navbar Menu -->
-              <ul>
-                <!-- Logout    -->
-                <li><a href="login.php">Logout</a></li>
-              </ul>
-        </nav>
-      </header>
+</head>
+<body>
+<header>
+    <div class="topnav">
+        <a href="#">Changerz Quiz</a>
+        <a href="index.php">Home </a>
+        <a href="addUser.php">Add User</a>
+        <a href="courses.php">Courses </a>
+        <a href="addCourse.php">Add Course</a>
+        <a href="questions.php">Question Bank </a>
+        <a href="addQuestion.php">Add Questions </a>
+        <a href="login.php" style="float: right">
+            <?php
+            echo $_SESSION['fullName'];
+            ?>, Logout</a>
+    </div>
+</header>
 
-        <!-- Side Navbar -->
-        <nav class="sidenav">
-          <!-- Sidebar Header-->
-          <div>
-            <div>
-              <h1><?php echo $_SESSION['fullName']; ?></h1>
-              <p>Admin</p>
+<main class="main">
+
+
+    <div class="log-form" style="margin-top: 10%">
+        <div id="addUserForm">
+            <h2>Add User</h2>
+        <form action="../admin/model/dataValidationUser.php" method="post">
+            <input type="hidden" name="action" value="saveUser">
+
+            <div id="saveAlert" role="alert">
+                Great, New User Successfully Added!!
             </div>
-          </div>
-          <!-- Sidebar Navidation Menus-->
-          <span>Main</span>
-          <ul>
-            <li><a href="index.php">Home </a></li>
-            <li class="active"><a href="addUser.php"> Add User</a></li>
-            <li><a href="courses.php"> Courses </a></li>
-            <li><a href="addCourse.php"> Add Course</a></li>
-            <li><a href="questions.php"> Question Bank </a></li>
-            <li><a href="addQuestion.php"> Add Questions </a></li>
-            <li><a href="login.php">Login page </a></li>
-          </ul>
-        </nav>
-      
-   <main class="main">
-          <!-- Page Header-->
-          <header >
-            <div >
-              <h2 >Forms</h2>
+            <div id="updateAlert" role="alert">
+                Great, User Successfully Updated!!
             </div>
-          </header>
-
-          <!-- Forms Section-->
-          <section > 
-            <div >
-              <div>
-               
-                <!-- Form Elements -->
-                <div >
-                  <div >
-                      <h3>User Details</h3>
-                  
-                    <div>
-<!-- ------------------ Form Starts here -->
-                      <div id="saveAlert" role="alert" >
-                           Great, New User Successfully Added!!
-                        </div>
-                        <div id="updateAlert" role="alert" >
-                           Great, User Successfully Updated!!
-                        </div>
-                        <div id="noUpdateAlert" role="alert">
-                           Updation Failed! <br>No such user exists!!
-                        </div>
-                        <div id="addUserForm" >
-                      <form action="../admin/model/dataValidationUser.php" method="post">
-                        <input type="hidden" name="action" value="saveUser">
-                        <div>
-                          <label>Mandatory Information</label>
-                          <div>
-                            <div>
-                              <input id="register-email" type="email" name="registerEmail" required>
-                              <label for="register-email" class="label-material">Email Address</label>
-                            </div>
-                            <div>
-                              <input id="register-password" type="password" name="registerPassword" required>
-                              <label for="register-password" class="label-material">Password</label>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div>
-                             <label>User Access <br><small>User is allowed to login or not</small></label>
-                            <div>
-                            <div>
-                              <input id="optionsRadios1" type="radio" checked="" value="1" name="userAccess">
-                              <label for="optionsRadios1">Active</label>
-                            </div>
-                            <div>
-                              <input id="optionsRadios2" type="radio" value="0" name="userAccess">
-                              <label for="optionsRadios2">Not Active</label>
-                            </div>
-                          </div>
-                        </div>
-                        <div></div>
-                        <div
-        >
-                          <label>Basic Information</label>
-                          <div>
-                            <div>
-                              <input id="firstName" type="text" name="firstName" required>
-                              <label for="firstName" class="label-material">First Name</label>
-                            </div>
-                            <div>
-                              <input id="lastName" type="text" name="lastName" required>
-                              <label for="lastName" class="label-material">Last Name</label>
-                            </div>
-                            <div>
-                            <input id="phone" type="text" name="phoneNumber" required>
-                            <label for="phone" class="label-material">Phone</label>
-                            </div>
-                            <div>
-                              <input id="address" type="text" name="address" required>
-                              <label for="address" class="label-material">Address</label>
-                            </div>
-                          </div>
-                        </div>
-                            <!-- <button type="submit" class="btn btn-secondary">Cancel</button> -->
-                            <input type="submit" class="btn btn-primary" name="saveUser" value="Save User">
-                            <input type="submit" class="btn btn-primary" name="updateUser" value="Update User">
-                      </form>
-                    </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div id="noUpdateAlert" role="alert">
+                Updation Failed! <br>No such user exists!!
             </div>
-          </section>
-   </main>
-  </body>
+
+            <input id="register-email" type="email" name="registerEmail" placeholder="Register Email Address" required>
+            <input id="register-password" type="password" name="registerPassword"  placeholder="Registerd Password" required>
+            <label>User is allowed to login or not</label>
+            <br>
+            <label style="font-size: 20px">Active</label>
+            <input id="optionsRadios1" type="radio" checked="" value="1" name="userAccess">
+
+           <label style="font-size: 20px">Not Active</label>
+            <input id="optionsRadios2" type="radio" value="0" name="userAccess">
+
+
+
+            <label>Basic Information</label><br><br>
+            <input id="firstName" type="text" name="firstName" placeholder="FirstName" required>
+            <input id="lastName" type="text" name="lastName" placeholder="LastName" required>
+            <input id="phone" type="text" name="phoneNumber" placeholder="Phone Number" required>
+            <input id="address" type="text" name="address" placeholder="Address" required>
+
+            <input type="submit" class="btn" name="saveUser" value="Save User">
+            <input type="submit" class="btn" name="updateUser" value="Update User">
+
+        </form>
+    </div>
+    </div>
+</main>
+</body>
 </html>

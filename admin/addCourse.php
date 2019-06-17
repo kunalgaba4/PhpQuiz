@@ -105,49 +105,30 @@ switch ($btnCheck) {
 
     <title>Online Exam</title>
       <link rel="stylesheet" href="css/style.basic.css">
+      <link rel="stylesheet" href="../courses/css/main.css">
+
+
   </head>
   <body>
-    <div>
-      <!-- Main Navbar-->
-      <header>
-        <nav>
-
-                <!-- Navbar Brand -->
-                <a href="index.php">
-              <span>Online Exam</span><strong>Admin</strong>
-                <!-- Toggle Button-->
-                <a id="toggle-btn" href="#"><span></span><span></span><span></span></a>
-
-              <!-- Navbar Menu -->
-              <ul>
-                <!-- Logout    -->
-                <li><a href="login.php" > Logout</a></li>
-              </ul>
-
-        </nav>
-      </header>
-
-        <!-- Side Navbar -->
-        <nav class="sidenav" >
-          <!-- Sidebar Header-->
-
-              <h1><?php echo $_SESSION['fullName']; ?></h1>
-              <p>Admin</p>
-
-          <ul >
-            <li><a href="index.php"> Home </a></li>
-            <li><a href="addUser.php"> Add User</a></li>
-            <li><a href="courses.php"> Courses </a></li>
-            <li><a href="addCourse.php"> Add Course</a></li>
-            <li><a href="questions.php"> Question Bank </a></li>
-            <li><a href="addQuestion.php"> Add Questions </a></li>
-            <li><a href="login.php">Login page </a></li>
-          </ul>
-        </nav>
+  <header>
+      <div class="topnav">
+          <a href="#">Changerz Quiz</a>
+          <a href="index.php">Home </a>
+          <a href="addUser.php">Add User</a>
+          <a href="courses.php">Courses </a>
+          <a href="addCourse.php">Add Course</a>
+          <a href="questions.php">Question Bank </a>
+          <a href="addQuestion.php">Add Questions </a>
+          <a href="login.php" style="float: right">
+              <?php
+              echo $_SESSION['fullName'];
+              ?>, Logout</a>
+      </div>
+  </header>
       
        <main class="main">
               <h2 >Forms</h2>
-            
+
 
 
 

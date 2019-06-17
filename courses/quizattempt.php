@@ -124,46 +124,27 @@ function getUserAttempt($email){
 
       <title>Online Exam</title>
       <link rel="stylesheet" href="css/style.basic.css">
+      <link rel="stylesheet" href="css/main.css">
 
   </head>
   <body>
 
-      <!-- Main Navbar-->
-      <header>
-      <span>Knowlegde Calculator &nbsp;</span><strong>User</strong>
-              <ul >
-                <!-- Logout    -->
-                <li class="nav-item"><a href="login.php" class="nav-link logout"> <span class="d-none d-sm-inline" name = "btnLogout">Logout</span><i class="fa fa-sign-out"></i></a></li>
-              </ul>
-      </header>
+  <header>
 
-        <nav class="sidenav">
-          <!-- Sidebar Header-->
-            <p>User</p>
-              <h1 >
-                
-                 <?php 
-                if(isset($_SESSION['user_email'])){
+      <div class="topnav">
+          <a href="#">Changerz Quiz</a>
+          <a href="course.php"> Courses </a>
+          <a href="profile.php"> Profile </a>
+          <a href="quizattempt.php"> Quiz Attempts</a>
+          <a href="login.php" style="float: right">
+              <?php
+              if (isset($_SESSION['user_email'])) {
                   $user = getUserName($_SESSION['user_email']);
-                  echo $user['firstName']. " ". $user['lastName'] ;
-                }
-                ?>
-              </h1>
-
-              <hr>
-
-          <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
-          <ul class="list-unstyled">
-                    <!-- <li><a href="index.html"> <i class="icon-home"></i>Home </a></li> -->
-                    <li><a href="course.php"> <i class="icon-padnote"></i>Courses </a></li>
-                    <li><a href="profile.php"> <i class="icon-interface-windows"></i>Profile </a></li>
-                    
-                    <li class="active"><a href="quizattempt.php"> <i class="icon-grid"></i>Quiz Attempts</a></li>
-<!--                     <li><a href="tables.html"> <i class="icon-grid"></i>Question Bank </a></li>
-                    <li><a href="tables.html"> <i class="icon-grid"></i>Add Questions </a></li>
-                    <li><a href="login.html"> <i class="icon-interface-windows"></i>Login page </a></li> -->
-          </ul>
-        </nav>
+                  echo $user['firstName'] . " " . $user['lastName'];
+              }
+              ?>, Logout</a>
+      </div>
+  </header>
       <main class="main">
 
                 <h2 > Quiz Attempts </h2>

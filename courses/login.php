@@ -66,6 +66,7 @@ if ($btnCheck == "incorrectPassword") {
             <button type="submit" name="login" class="btn">Login</button>
             <button class="btn"><a href="register.php" style="text-decoration: none; color: white;">Register</a></button>
         </form>
+
     </div>
 
 </body>
